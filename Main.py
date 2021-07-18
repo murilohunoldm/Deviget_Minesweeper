@@ -45,3 +45,12 @@ my_font = pygame.font.SysFont("",700/t)
 menu_fnt = pygame.font.SysFont("Segoe UI", 16, True, False)
 msg_fnt = pygame.font.SysFont("Verdana", 14, True, False)
 
+#Images
+#Casa padrao
+q = pygame.transform.scale(pygame.image.load("quad0.png").convert_alpha(), (comp, alt))
+#Casa clicada
+q2 = pygame.transform.scale(pygame.image.load("quad1.png").convert_alpha(), (comp, alt))
+#Bandeira
+q2 = pygame.transform.scale(pygame.image.load("band.png").convert_alpha(), (comp, alt))
+#Bomb
+#q2 = pygame.transform.scale(pygame.image.load("b.png").convert_alpha(), (comp, alt))
