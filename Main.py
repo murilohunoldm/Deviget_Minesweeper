@@ -53,6 +53,35 @@ q2 = pygame.transform.scale(pygame.image.load("quad1.png").convert_alpha(), (com
 #Bandeira
 q2 = pygame.transform.scale(pygame.image.load("band.png").convert_alpha(), (comp, alt))
 #Bomb
-q2 = pygame.transform.scale(pygame.image.load("bomb.png").convert_alpha(), (comp, alt))
+bomba = pygame.transform.scale(pygame.image.load("bomb.png").convert_alpha(), (comp, alt))
 #Logo do Jogo
 #logo = pygame.image.load("logo.png").convert_alpha()
+
+
+#Define o icone da janela
+pygame.display.set_icon(bomba)
+
+#Funcao que inicia a partida
+def inicio():
+    #Define o uso de variaveis globais
+    global campo, af, mband, t, bombs, acertos, fim, jogou, relogio
+    #Inicializa/zera as variaveis globais
+    bombs=0; acertos=0; fim=False; jogou=False
+    campo= [["" for j in range(t)] for i in range(t)]
+    af= [[0 for j in range(t)] for i in range(t)]
+    mband= [[0 for j in range(t)] for i in range(t)]
+
+    #Desenha o Menu
+    pts.fill( (0,0,0) )
+    pts.blit(menu_fnt.render("[M] Música [T] Tela cheia [R] Reiniciar [S] Sair", True, (255, 255, 255)), (250, 20) )
+    #Desenho o cenário
+    for x in range(t):
+        for y in range(t):
+            screen.blit(q, (x*comp, y*alt))
+        pygame.display.update()
+
+
+#Funcao para distribuir as bombas na matriz
+
+
+
