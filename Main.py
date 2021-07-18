@@ -35,3 +35,13 @@ pygame.mouse.set_cursor(*pygame.cursors.diamond)
 cabec = pygame.Surface( (640, 80), 0, 32)
 screen = pygame.Surface( (640, 480), 0, 32)
 pts = pygame.Surface( (640, 50), 0, 32)
+
+#Define comprimento e altura de cada casa do campo minado
+comp = int(screen.get_width()/t)
+alt = int(screen.get_height()/t)
+
+#Cria fonte para os numeros do campo de acordo com o tamanho da matriz e com fonte padrao
+my_font = pygame.font.SysFont("",700/t)
+menu_fnt = pygame.font.SysFont("Segoe UI", 16, True, False)
+msg_fnt = pygame.font.SysFont("Verdana", 14, True, False)
+
