@@ -53,4 +53,6 @@ q2 = pygame.transform.scale(pygame.image.load("quad1.png").convert_alpha(), (com
 #Bandeira
 q2 = pygame.transform.scale(pygame.image.load("band.png").convert_alpha(), (comp, alt))
 #Bomb
-#q2 = pygame.transform.scale(pygame.image.load("b.png").convert_alpha(), (comp, alt))
+q2 = pygame.transform.scale(pygame.image.load("bomb.png").convert_alpha(), (comp, alt))
+#Logo do Jogo
+#logo = pygame.image.load("logo.png").convert_alpha()
