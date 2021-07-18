@@ -41,7 +41,7 @@ comp = int(screen.get_width()/t)
 alt = int(screen.get_height()/t)
 
 #Cria fonte para os numeros do campo de acordo com o tamanho da matriz e com fonte padrao
-my_font = pygame.font.SysFont("",700/t)
+my_font = pygame.font.SysFont("", int(700/t))
 menu_fnt = pygame.font.SysFont("Segoe UI", 16, True, False)
 msg_fnt = pygame.font.SysFont("Verdana", 14, True, False)
 
@@ -73,7 +73,7 @@ def inicio():
 
     #Desenha o Menu
     pts.fill( (0,0,0) )
-    pts.blit(menu_fnt.render("[M] Música [T] Tela cheia [R] Reiniciar [S] Sair", True, (255, 255, 255)), (250, 20) )
+    pts.blit(menu_fnt.render("[M] Música [T] Tela cheia [R] Reiniciar [S] Sair", True, (255, 255, 255)), (250, 20))
     #Desenho o cenário
     for x in range(t):
         for y in range(t):
@@ -128,7 +128,7 @@ def abrir(x, y):
                     screen.blit(q2, (c*comp, l*alt))
                     if(campo[l][c]!="0"):
                         screen.blit(Colorir(campo[l][c]), ((c*comp+(comp/4)), l*alt))
-                    elif(campo[l][c]=="0" and (af[l][c]==0 and (l!=y or c!=x)))
+                    elif(campo[l][c]=="0" and (af[l][c]==0 and (l!=y or c!=x))):
                         abrir(c,l)
                     af[l][c]=1
 
@@ -176,7 +176,8 @@ def Explodir(x,y):
         m+=1
         n+=1
     fim=True
-    pts.blit(msg_fnt.render("Que pena, você perdeu! Tempo: "+str(relogio.tick()/1000)+ " seg", True, (230, 230, 0), (10, 10, 10)))
+    #pts.blit(msg_fnt.render("Que pena, você perdeu! Tempo: "+str(relogio.tick()/1000)+ " seg", True, (230, 230, 0), (10, 10, 10)))
+    pts.blit(msg_fnt.render("Que pena, você perdeu! Tempo: "+str(relogio.tick()/1000)+ " seg", True, (230, 230, 0)),  (0, 0))
 
 #Funcao para verificar a jogada
 def Jogar(x, y):
@@ -205,7 +206,7 @@ def Bandeirar(x,y):
         mband[y][x]=0
     if(acertos==bombs and bombs>0):
         fim=True
-        pts.blit(msg_fnt.render("Parabéns você ganhou! Tempo: "+str(relogio.tick()/1000)+ " seg", True, (230, 230, 0), (10, 10, 10)))
+        pts.blit(msg_fnt.render("Parabéns você ganhou! Tempo: "+str(relogio.tick()/1000)+ " seg", True, (230, 230, 0)),  (0, 0))
 pygame.display.update()
 jogou=False
 inicio()
@@ -215,7 +216,7 @@ while True:
         if e.type == QUIT:
             exit()
         #Opcoes de clique
-        if ((e.type == MOUSEBUTTONDOWN and pygame.mouse.get_pressed()==(1,0,0) and fim ==False))
+        if ((e.type == MOUSEBUTTONDOWN and pygame.mouse.get_pressed()==(1,0,0) and fim ==False)):
             (x,y) = e.pos
             if(int(y/alt)<t):
                 if(not jogou):
@@ -229,10 +230,10 @@ while True:
             if(int(y/alt)<t):
                 (x,y) = e.pos
                 Bandeirar(int(x/comp), int(y/alt))
-        wnd.blit((cabec, (0, 480)))
-        wnd.blit((screen, (0, 0)))
-        wnd.blit((pts, (0, 560)))
-        #cabec.blit((logo, (0, 0)))
+        wnd.blit(cabec, (0, 480))
+        wnd.blit(screen, (0, 0))
+        wnd.blit(pts, (0, 560))
+        #cabec.blit(logo, (0, 0))
 
         pygame.display.update()
 
@@ -241,3 +242,16 @@ while True:
             inicio()
         if (e.type == KEYDOWN and e.key == K_s):
             exit()
+        if (e.type == KEYDOWN and e.key == K_t):
+            if not fullscreen:
+                wnd = pygame.display.set_mode( (800, 765), pygame.FULLSCREEN, 32)
+                fullscreen=True
+            else:
+                wnd = pygame.display.set_mode((640, 610), 0, 32)
+                fullscreen=False
+        if (e.type == KEYDOWN and e.key == K_m):
+            if pygame.mixer.music.get_busy():
+                pygame.mixer.music.stop()
+            else:
+                pygame.mixer.music.play()
+    pygame.display.update()
