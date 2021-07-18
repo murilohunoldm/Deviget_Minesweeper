@@ -51,7 +51,7 @@ q = pygame.transform.scale(pygame.image.load("quad0.png").convert_alpha(), (comp
 #Casa clicada
 q2 = pygame.transform.scale(pygame.image.load("quad1.png").convert_alpha(), (comp, alt))
 #Bandeira
-q2 = pygame.transform.scale(pygame.image.load("band.png").convert_alpha(), (comp, alt))
+band = pygame.transform.scale(pygame.image.load("band.png").convert_alpha(), (comp, alt))
 #Bomb
 bomba = pygame.transform.scale(pygame.image.load("bomb.png").convert_alpha(), (comp, alt))
 #Logo do Jogo
@@ -191,3 +191,53 @@ def Jogar(x, y):
         Explodir(x,y)
 
 #Marcar Bandeiras
+def Bandeirar(x,y):
+    global acertos, bombs, fim
+    if(mband[y][x]==0 and af[y][x]==0):
+        if(campo[y][x]=="*"):
+            acertos+=1
+        mband[y][x]=1
+        screen.blit(band, ((int(x)*comp+(comp/8)), (int(y)*alt+(alt/8))))
+    elif(af[y][x]==0):
+        if(campo[y][x]=="*"):
+            acertos-=1
+        screen.blit(q, ( (int(x))*comp, (int(y))*alt))
+        mband[y][x]=0
+    if(acertos==bombs and bombs>0):
+        fim=True
+        pts.blit(msg_fnt.render("Parabéns você ganhou! Tempo: "+str(relogio.tick()/1000)+ " seg", True, (230, 230, 0), (10, 10, 10)))
+pygame.display.update()
+jogou=False
+inicio()
+
+while True:
+    for e in pygame.event.get():
+        if e.type == QUIT:
+            exit()
+        #Opcoes de clique
+        if ((e.type == MOUSEBUTTONDOWN and pygame.mouse.get_pressed()==(1,0,0) and fim ==False))
+            (x,y) = e.pos
+            if(int(y/alt)<t):
+                if(not jogou):
+                    jogou=Criar(int(x/comp), int(y/alt))
+                    Jogar(int(x/comp), int(y/alt))
+                    #marca inicio da contagem
+                    relogio.tick()
+                elif(mband[int(y/alt)][int(x/comp)]==0):
+                    Jogar(int(x / comp), int(y / alt))
+        if (((e.type == MOUSEBUTTONDOWN and pygame.mouse.get_pressed()==(0,0,1)) and fim == False)and jogou==True):
+            if(int(y/alt)<t):
+                (x,y) = e.pos
+                Bandeirar(int(x/comp), int(y/alt))
+        wnd.blit((cabec, (0, 480)))
+        wnd.blit((screen, (0, 0)))
+        wnd.blit((pts, (0, 560)))
+        #cabec.blit((logo, (0, 0)))
+
+        pygame.display.update()
+
+        #Opcoes do teclado
+        if(e.type == KEYDOWN and e.key==K_r):
+            inicio()
+        if (e.type == KEYDOWN and e.key == K_s):
+            exit()
