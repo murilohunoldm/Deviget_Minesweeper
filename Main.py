@@ -167,14 +167,23 @@ def Explode(x, y):
                     af[l][x+n]=1
                     time.sleep(0.05)
                     screen.blit(bomba, ((x+n)*comp, l*alt))
-                    # b_som.play()
                     wnd.blit(screen, (0, 0))
                     pygame.display.update()
                     b += 1
+        for l in range(y+n, y+n+1, 1):
+            for c in range(x + 1 + m,x-2-m, -1):
+                if ((l>=0 and c>=0) and (l<t and c<t)):
+                    if(campo[l][c]=="*"):
+                        af[l][c]=1
+                        time.sleep(0.05)
+                        screen.blit(bomba, (c*comp, l*alt))
+                        wnd.blit(screen, (0, 0))
+                        pygame.display.update()
+                        b += 1
         m+=1
         n+=1
     endgame=True
-    pts.blit(msg_fnt.render("Sorry, you lost! Time: "+str(relogio.tick()/1000)+ " seg", True, (230, 230, 0)),(10, 0))
+    pts.blit(msg_fnt.render("Sorry, you lose! Time: "+str(relogio.tick()/1000)+ " seg", True, (230, 230, 0)),(10, 0))
 
 #Function to check the player move
 def Play(x, y):
