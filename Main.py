@@ -80,7 +80,7 @@ def Start():
             screen.blit(q, (x * width, y * height))
         pygame.display.update()
 
-
+#
 #Function to distribute the bombs in the matrix
 def Create(x1, y1):
     global bombs
