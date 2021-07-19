@@ -1,5 +1,6 @@
 #Libraries
-import pygame, os
+import pygame
+import os
 from pygame.locals import *
 from pygame import font
 from random import randint
@@ -73,7 +74,8 @@ def inicio():
 
     #Desenha o Menu
     pts.fill( (0,0,0) )
-    pts.blit(menu_fnt.render("[M] Música [T] Tela cheia [R] Reiniciar [S] Sair", True, (255, 255, 255)), (250, 20))
+    #pts.blit(menu_fnt.render("[M] Música [T] Tela cheia [R] Reiniciar [S] Sair", True, (255, 255, 255)), (250, 20))
+    pts.blit(menu_fnt.render("[F] Full Screen [R] Restart [Q] Quit", True, (255, 255, 255)), (250, 20))
     #Desenho o cenário
     for x in range(t):
         for y in range(t):
@@ -135,7 +137,6 @@ def abrir(x, y):
 #Funcao para explodir as bombas em espiral
 def Explodir(x,y):
     screen.blit(bomba, ((int(x)*comp), (int(y)*alt)))
-    #b_som.play()
     wnd.blit(screen, (0,0))
     b=1
     m=0
@@ -148,7 +149,6 @@ def Explodir(x,y):
                     af[l][x-n]=1
                     time.sleep(0.05)
                     screen.blit(bomba, ((x-n)*comp, l*alt))
-                    #b_som.play()
                     wnd.blit(screen, (0,0))
                     pygame.display.update()
                     b+=1
@@ -159,7 +159,6 @@ def Explodir(x,y):
                         af[l][c]=1
                         time.sleep(0.05)
                         screen.blit(bomba, (c*comp, l*alt))
-                        # b_som.play()
                         wnd.blit(screen, (0, 0))
                         pygame.display.update()
                         b += 1
@@ -177,7 +176,7 @@ def Explodir(x,y):
         n+=1
     fim=True
     #pts.blit(msg_fnt.render("Que pena, você perdeu! Tempo: "+str(relogio.tick()/1000)+ " seg", True, (230, 230, 0), (10, 10, 10)))
-    pts.blit(msg_fnt.render("Que pena, você perdeu! Tempo: "+str(relogio.tick()/1000)+ " seg", True, (230, 230, 0)),  (0, 0))
+    pts.blit(msg_fnt.render("Sorry, you lost! Time: "+str(relogio.tick()/1000)+ " seg", True, (230, 230, 0)),(10, 0))
 
 #Funcao para verificar a jogada
 def Jogar(x, y):
@@ -206,7 +205,7 @@ def Bandeirar(x,y):
         mband[y][x]=0
     if(acertos==bombs and bombs>0):
         fim=True
-        pts.blit(msg_fnt.render("Parabéns você ganhou! Tempo: "+str(relogio.tick()/1000)+ " seg", True, (230, 230, 0)),  (0, 0))
+        pts.blit(msg_fnt.render("Congratulations, you WON! Time: "+str(relogio.tick()/1000)+" seg", True, (230, 230, 0)),(10, 0))
 pygame.display.update()
 jogou=False
 inicio()
@@ -240,18 +239,13 @@ while True:
         #Opcoes do teclado
         if(e.type == KEYDOWN and e.key==K_r):
             inicio()
-        if (e.type == KEYDOWN and e.key == K_s):
+        if (e.type == KEYDOWN and e.key == K_q):
             exit()
-        if (e.type == KEYDOWN and e.key == K_t):
+        if (e.type == KEYDOWN and e.key == K_f):
             if not fullscreen:
                 wnd = pygame.display.set_mode( (800, 765), pygame.FULLSCREEN, 32)
                 fullscreen=True
             else:
                 wnd = pygame.display.set_mode((640, 610), 0, 32)
                 fullscreen=False
-        if (e.type == KEYDOWN and e.key == K_m):
-            if pygame.mixer.music.get_busy():
-                pygame.mixer.music.stop()
-            else:
-                pygame.mixer.music.play()
     pygame.display.update()
