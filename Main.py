@@ -2,7 +2,6 @@
 import pygame
 import os
 from pygame.locals import *
-from pygame import font
 from random import randint
 import time
 
@@ -48,13 +47,13 @@ msg_fnt = pygame.font.SysFont("Verdana", 14, True, False)
 
 #Images
 #Normal square
-q = pygame.transform.scale(pygame.image.load("quad0.png").convert_alpha(), (comp, alt))
+q = pygame.transform.scale(pygame.image.load("images/quad0.png").convert_alpha(), (comp, alt))
 #clicked square
-q2 = pygame.transform.scale(pygame.image.load("quad1.png").convert_alpha(), (comp, alt))
+q2 = pygame.transform.scale(pygame.image.load("images/quad1.png").convert_alpha(), (comp, alt))
 #Flag
-flag = pygame.transform.scale(pygame.image.load("band.png").convert_alpha(), (comp, alt))
+flag = pygame.transform.scale(pygame.image.load("images/band.png").convert_alpha(), (comp, alt))
 #Bomb
-bomba = pygame.transform.scale(pygame.image.load("bomb.png").convert_alpha(), (comp, alt))
+bomba = pygame.transform.scale(pygame.image.load("images/bomb.png").convert_alpha(), (comp, alt))
 #Logo do Jogo
 #logo = pygame.image.load("logo.png").convert_alpha()
 
